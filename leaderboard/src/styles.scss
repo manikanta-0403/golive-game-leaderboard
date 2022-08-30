@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // background-image: url('https://esportstitans.gogame.live/Lederboard_BG.c02fd86….jpg') !important;
+}
+
+.background-container {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(./assets/images/Lederboard_BG.c02fd867ca63311929e0.jpg) no-repeat center center fixed;
+}
+
+.mat-form-field-appearance-outline .mat-focused .mat-form-field-outline-thick {
+    color: white !important;
+}
