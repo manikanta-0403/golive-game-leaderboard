@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ILeaderBoardDto } from '../models/leaderBoard';
@@ -16,7 +16,7 @@ const LEADER_BOARD_MOCK_DATA: ILeaderBoardDto[] = LEADERBOARD_DATA;
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
 })
-export class LeaderboardComponent implements AfterViewInit {
+export class LeaderboardComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
@@ -65,6 +65,17 @@ export class LeaderboardComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.sort.disableClear = true;
+  }
+
+  ngOnInit() {
+    // the sorting data accessor will make it case insensitive by checking for lower case value comparison
+    this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+      if (typeof data[sortHeaderId] === 'string') {
+        return data[sortHeaderId].toLocaleLowerCase();
+      }
+      return data[sortHeaderId];
+    };
   }
 
   /** Announce the change in sort state for assistive technology. */
